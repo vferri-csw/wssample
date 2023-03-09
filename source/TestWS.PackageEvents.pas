@@ -23,8 +23,11 @@ uses
 
 
 class procedure TPackageEvents.OnAfterLoad;
+var
+  LRegistry: IWebModuleRegistry;
 begin
-  ERPCoreContainer.Resolve<IWebModuleRegistry>.RegisterHook('TestMiddleware',
+  LRegistry := ERPCoreContainer.Resolve<IWebModuleRegistry>;
+  LRegistry.RegisterHook('TestMiddleware',
     procedure(AServer: TMVCEngine)
     begin
       AServer.AddMiddleware(TTestMiddleware.Create);
@@ -32,7 +35,11 @@ begin
 end;
 
 class procedure TPackageEvents.OnBeforeUnLoad;
+var
+  LRegistry: IWebModuleRegistry;
 begin
+  LRegistry := ERPCoreContainer.Resolve<IWebModuleRegistry>;
+  LRegistry.UnregisterHook('TestMiddleware');
 end;
 
 end.
