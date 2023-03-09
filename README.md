@@ -1,4 +1,4 @@
-# wssamples
+# WS Sample
 Esempio di `middleware` da attivare su web service di ERP2.
 
 ## Installazione
