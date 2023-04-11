@@ -13,10 +13,8 @@ type
 implementation
 
 uses
-  MVCFramework,
   TestWS.Middleware,
   CSWebFramework.Globals;
-
 
 { TPackageEvents }
 
