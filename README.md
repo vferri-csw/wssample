@@ -1,5 +1,5 @@
 # WS Sample
-Esempio di `middleware` da attivare su web service di ERP2.
+Esempio di `middleware` da attivare su web service di ERP2 [^1].
 
 ## Installazione
 
@@ -36,3 +36,4 @@ Risultato dopo l'attivazione del `middleware`:
 
 ![image](https://user-images.githubusercontent.com/51919683/224072441-a830329a-2575-4677-92c1-5c85ac6b8ca7.png)
 
+[^1]: Compatibile con la versione `6.2.0.0`
