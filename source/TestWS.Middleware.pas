@@ -10,10 +10,7 @@ uses
 type
   TTestMiddleware = class(TCSMiddleware)
   private
-    //FSession: ISession;
     FActivateMyLogic: boolean;
-
-    function GetSession(AContext: TWebContext): ISession;
   public
     /// <summary>
     /// Procedure is called before the MVCEngine routes the request to a specific controller/method.
@@ -74,30 +71,6 @@ uses
 
 { TTestMiddleware }
 
-function TTestMiddleware.GetSession(AContext: TWebContext): ISession;
-var
-  LHandler: IFullCredentialsSessionHandler;
-  LSessionID: TGUID;
-  LRequestModel: TCSLoginRequestModel;
-begin
-  inherited;
-
-  LHandler := ERPCoreContainer.Resolve<IFullCredentialsSessionHandler>;
-  if Assigned(LHandler) then
-  begin
-    //FSession := LHandler.GetSessionByThreadID(TThread.Current.ThreadID)
-    LRequestModel := TCSLoginRequestModelSerializer.Deserialize(AContext.LoggedUser.CustomData['Session']);
-    try
-      LSessionID := LHandler.GetSessionID(LRequestModel.Username,
-        LRequestModel.Password, LRequestModel.CompanyID, LRequestModel.DivisionID);
-      Result := ERPSessionManager.GetSessionByID(LSessionID)
-    finally
-      LRequestModel.Free;
-    end;
-  end;
-
-end;
-
 procedure TTestMiddleware.OnAfterControllerAction(AContext: TWebContext;
   const AActionName: string; const AHandled: Boolean);
 var
@@ -106,9 +79,9 @@ var
 begin
     if FActivateMyLogic then
     begin
-      if not GetSession(AContext).GetInterfOggetto('objArtCla1', 'ArtCla1', IArtCla1RT, LArtCla) then
+      if not FCurrentSession.GetInterfOggetto('objArtCla1', 'ArtCla1', IArtCla1RT, LArtCla) then
       begin
-        raise Exception.Create('Errore durante il reperinmeto dell''oggetto ArtCla1');
+        raise Exception.Create('Errore durante il reperimento dell''oggetto ArtCla1');
       end;
 
       LModel := AContext.Request.BodyAs<TCodiceDescrModel>;

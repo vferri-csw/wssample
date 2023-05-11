@@ -1,13 +1,13 @@
 # WS Sample
-Esempio di `middleware` da attivare su web service di ERP2.
+Esempio di `middleware` da attivare su web service di ERP2 [^1].
 
 ## Installazione
 
 1. Fermare il servizio `CSWERPWEBSRV_AXX_XXXXXXXXXX` o chiudere la console `SAMWebService_server.exe`
-2. Aggiungere nella sezione moduli il nome del progetto senza il suffisso `WS`.
+2. Aggiungere nella sezione `WSPlugin` il nome del progetto.
     ```
-    [Moduli]
-    M_Test=Plug-in middleware
+    [WSPlugin]
+    PI_TestWS=Plug-in middleware
     ```
 
 4. Riavviare il servizio o la console
@@ -36,3 +36,4 @@ Risultato dopo l'attivazione del `middleware`:
 
 ![image](https://user-images.githubusercontent.com/51919683/224072441-a830329a-2575-4677-92c1-5c85ac6b8ca7.png)
 
+[^1]: Compatibile con la versione `6.2.0.0`

@@ -13,33 +13,20 @@ type
 implementation
 
 uses
-  MVCFramework,
   TestWS.Middleware,
-  CSWebFramework.Interfaces,
-  CSCore.Globals;
-
+  CSWebFramework.Globals;
 
 { TPackageEvents }
 
 
 class procedure TPackageEvents.OnAfterLoad;
-var
-  LRegistry: IWebModuleRegistry;
 begin
-  LRegistry := ERPCoreContainer.Resolve<IWebModuleRegistry>;
-  LRegistry.RegisterHook('TestMiddleware',
-    procedure(AServer: TMVCEngine)
-    begin
-      AServer.AddMiddleware(TTestMiddleware.Create);
-    end);
+  RegisterWebServiceHook('TestMiddleware', TTestMiddleware.Create);
 end;
 
 class procedure TPackageEvents.OnBeforeUnLoad;
-var
-  LRegistry: IWebModuleRegistry;
 begin
-  LRegistry := ERPCoreContainer.Resolve<IWebModuleRegistry>;
-  LRegistry.UnregisterHook('TestMiddleware');
+  UnRegisterWebServiceHook('TestMiddleware');
 end;
 
 end.
