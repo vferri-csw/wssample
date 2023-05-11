@@ -25,10 +25,9 @@ type
     /// <param name="AContext">Webcontext which contains the complete request and response of the actual call.</param>
     /// <param name="AControllerQualifiedClassName">Qualified classname of the matching controller.</param>
     /// <param name="AActionName">Method name of the matching controller method.</param>
-    /// <param name="AHandled">If set to True the Request would finished. Response must be set by the implementor. Default value is False.</param>
-    procedure OnBeforeControllerAction(AContext: TWebContext;
-      const AControllerQualifiedClassName: string; const AActionName: string;
-      var AHandled: Boolean); override;
+    /// <param name="AHandled">If set to True the Request would finished. Response must be set by the implementor. Default value is False.</param>    procedure OnBeforeControllerAction(AContext: TWebContext;
+    procedure OnBeforeControllerAction(AContext: TWebContext; const AControllerQualifiedClassName: string;
+      const AActionName: string; var AHandled: Boolean); override;
 
     /// <summary>
     /// Procedure is called after the specific controller method was called.
@@ -37,7 +36,8 @@ type
     /// <param name="AContext">Webcontext which contains the complete request and response of the actual call.</param>
     /// <param name="AActionName">Method name of the matching controller method.</param>
     /// <param name="AHandled">If set to True the Request would finished. Response must be set by the implementor. Default value is False.</param>
-    procedure OnAfterControllerAction(AContext: TWebContext; const AActionName: string;
+    procedure OnAfterControllerAction(AContext: TWebContext;
+      const AControllerQualifiedClassName: string; const AActionName: string;
       const AHandled: Boolean); override;
 
     /// <summary>
@@ -72,7 +72,8 @@ uses
 { TTestMiddleware }
 
 procedure TTestMiddleware.OnAfterControllerAction(AContext: TWebContext;
-  const AActionName: string; const AHandled: Boolean);
+      const AControllerQualifiedClassName: string; const AActionName: string;
+      const AHandled: Boolean);
 var
   LModel: TCodiceDescrModel;
   LArtCla: IArtCla1RT;
