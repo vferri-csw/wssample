@@ -80,7 +80,7 @@ var
 begin
     if FActivateMyLogic then
     begin
-      if not FCurrentSession.GetInterfOggetto('objArtCla1', 'ArtCla1', IArtCla1RT, LArtCla) then
+      if not GetCurrentSession(AContext).GetInterfOggetto('objArtCla1', 'ArtCla1', IArtCla1RT, LArtCla) then
       begin
         raise Exception.Create('Errore durante il reperimento dell''oggetto ArtCla1');
       end;
