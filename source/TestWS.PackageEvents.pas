@@ -21,12 +21,12 @@ uses
 
 class procedure TPackageEvents.OnAfterLoad;
 begin
-  RegisterWebServiceHook('TestMiddleware', TTestMiddleware.Create);
+  RegisterWebServiceMiddleware('TestMiddleware', TTestMiddleware.Create);
 end;
 
 class procedure TPackageEvents.OnBeforeUnLoad;
 begin
-  UnRegisterWebServiceHook('TestMiddleware');
+  UnRegisterWebServiceMiddleware('TestMiddleware');
 end;
 
 end.
